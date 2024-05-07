@@ -27,10 +27,10 @@ class Node2vec(object):
             num_walks=num_paths, walk_length=path_length)
         kwargs["sentences"] = sentences
         kwargs["min_count"] = kwargs.get("min_count", 0)
-        kwargs["size"] = kwargs.get("size", dim)
+        kwargs["vector_size"] = kwargs.get("vector_size", dim)
         kwargs["sg"] = 1
 
-        self.size = kwargs["size"]
+        self.vector_size = kwargs["vector_size"]
         print("Learning representation...")
         word2vec = Word2Vec(**kwargs)
         self.vectors = {}
@@ -41,7 +41,7 @@ class Node2vec(object):
     def save_embeddings(self, filename):
         fout = open(filename, 'w')
         node_num = len(self.vectors.keys())
-        fout.write("{} {}\n".format(node_num, self.size))
+        fout.write("{} {}\n".format(node_num, self.vector_size))
         for node, vec in self.vectors.items():
             fout.write("{} {}\n".format(node,
                                         ' '.join([str(x) for x in vec])))

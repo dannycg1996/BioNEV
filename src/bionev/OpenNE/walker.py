@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import random
-
+import json
 import numpy as np
 
 
@@ -38,6 +38,7 @@ class BasicWalker:
         '''
         Repeatedly simulate random walks from each node.
         '''
+        print('simulating walks')
         G = self.G
         walks = []
         nodes = list(G.nodes())
@@ -141,6 +142,7 @@ class Walker:
         G = self.G
 
         alias_nodes = {}
+
         for node in G.nodes():
             unnormalized_probs = [G[node][nbr]['weight']
                                   for nbr in G.neighbors(node)]
@@ -154,7 +156,11 @@ class Walker:
 
         look_up_dict = self.look_up_dict
         node_size = self.node_size
+        idx = 0
+        nodeLen = len(G.edges())
         for edge in G.edges():
+            print('idx', idx, nodeLen)
+            idx += 1
             alias_edges[edge] = self.get_alias_edge(edge[0], edge[1])
 
         self.alias_nodes = alias_nodes

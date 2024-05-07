@@ -187,6 +187,7 @@ def main(args):
 
 def more_main():
     args = parse_args()
+    print('args', args)
     seed = args.seed
     random.seed(seed)
     np.random.seed(seed)
